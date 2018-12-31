@@ -1,27 +1,31 @@
-import React from "react";
+import React from 'react';
 import { connect } from 'dva';
-import PageHeaderWrapper from '@/components/PageHeaderWrapper'
-import FooterToolbar from '@/components/FooterToolbar'
-import { Card, Button, Steps, Icon, Affix, Form, Input } from "antd";
-import ShareDescExtra from './Widget/ShareDescExtra'
-import EditGoodsImageList from './Widget/EditGoodsImageList'
-import MediaDialog from '@/components/MediaDialog'
-const styles = require('./Edit.less')
+import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import FooterToolbar from '@/components/FooterToolbar';
+import { Card, Button, Steps, Icon, Affix, Form, Input } from 'antd';
+import ShareDescExtra from './Widget/ShareDescExtra';
+import EditGoodsImageList from './Widget/EditGoodsImageList';
+import MediaDialog from '@/components/MediaDialog';
+import EditGoodsSku from '@/pages/Goods/Widget/EditGoodsSku';
+
+const styles = require('./Edit.less');
+
 interface IProps {
 
 }
+
 interface IState {
 
 }
-@connect(({ media }) => {
-  return {
 
-  }
+@connect(({ media }) => {
+  return {};
 })
 class GoodsEdit extends React.Component<IProps, IState> {
   componentDidMount() {
 
   }
+
   render() {
     const formItemLayout = {
       labelCol: { span: 2 },
@@ -29,7 +33,7 @@ class GoodsEdit extends React.Component<IProps, IState> {
     };
 
     const FormTitle = ({ title }) => {
-      return <div className={styles.formTitle}>{title}</div>
+      return <div className={styles.formTitle}>{title}</div>;
     };
 
     return (
@@ -43,7 +47,7 @@ class GoodsEdit extends React.Component<IProps, IState> {
             </Steps>
           </div>
 
-          <Form >
+          <Form>
             <Affix>
               <FormTitle title='基本信息' />
             </Affix>
@@ -56,20 +60,25 @@ class GoodsEdit extends React.Component<IProps, IState> {
             <Form.Item {...formItemLayout} label='商品图' required extra={'建议尺寸：800*800像素，你可以拖拽图片调整顺序，最多上传15张'}>
               <EditGoodsImageList {...this.props} />
             </Form.Item>
+            <Affix>
+              <FormTitle title='价格库存' />
+            </Affix>
+            <Form.Item {...formItemLayout} label={'商品规格'} extra={'如有颜色、尺码等多种规格，请添加商品规格'}>
+              <EditGoodsSku/>
+            </Form.Item>
           </Form>
-          <Affix>
-            <FormTitle title='价格库存' />
-          </Affix>
+
 
         </Card>
         <FooterToolbar extra="extra information">
-          <Button >保存并查看</Button>
+          <Button>保存并查看</Button>
           <Button type='primary'>下一步</Button>
         </FooterToolbar>
         <MediaDialog />
       </PageHeaderWrapper>
-    )
+    );
   }
 }
+
 export default GoodsEdit;
 
