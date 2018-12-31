@@ -10,7 +10,7 @@ class ShareDEscExtra extends PureComponent {
     </div>);
     return <div>
       <span>分享给好友时会显示，建议36个字以内。</span>
-      <Popover content={centent} trigger='click' placement='right'>
+      <Popover content={centent} trigger='click' placement='rightTop'>
         <a>查看示例</a>
       </Popover>
     </div>

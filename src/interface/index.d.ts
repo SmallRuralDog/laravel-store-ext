@@ -1,3 +1,4 @@
+
 declare namespace Models {
   interface Goods {
     /**
@@ -7,7 +8,18 @@ declare namespace Models {
   }
 
   interface GoodsListItem {
-    name: string;
+    title: string;
+    image_url: string;
+    created_time: string;
+    price: string;
+    item_id: string;
+    url: string;
+    alias: string;
+    stock_num:string;
+    sold_num:number;
+    visit_count_uv:number;
+    visit_count_pv:number;
+    is_used:number;
   }
 
 
