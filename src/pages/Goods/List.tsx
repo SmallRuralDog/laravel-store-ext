@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Icon, Card, Table, Avatar, Tag, Row, Col, Popover } from "antd";
+import { Button, Icon, Card, Table, Avatar, Tag, Row, Col } from "antd";
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import { connect } from 'dva';
 import Link from "umi/link";
