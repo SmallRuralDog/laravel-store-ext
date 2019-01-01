@@ -3,6 +3,7 @@ import SkuSelect from "./SkuSelect";
 const styles = require('./styles.less');
 import * as _ from 'lodash';
 import { Select, Tooltip, Checkbox, Icon, Button } from "antd";
+import AddImageView from '@/components/Widget/AddImageView';
 class SkuListEdit extends Component<{
     sku_group: Models.IGroupItem[];
     goods: Models.Goods;
@@ -60,7 +61,7 @@ class SkuListEdit extends Component<{
                     <div className={styles.sku_group_container}>
                         <span style={{ flexShrink: 0, lineHeight: '30px' }}>规格值：</span>
                         {SkuGroupItem.id ?
-                            <div className='f-c' style={{ flexWrap: 'wrap', flex: 1 }}>
+                            <div className='flex' style={{ flexWrap: 'wrap', flex: 1 }}>
                                 {SkuGroupItem.sku_list.map((SkuListItem, SkuListIndex) => {
                                     const selfSku = _.first(_.filter(goods.skus, (gs) => {
                                         return gs.id === SkuGroupItem.id
@@ -96,6 +97,11 @@ class SkuListEdit extends Component<{
                                                 <Icon type="close-circle" theme='twoTone' style={{ fontSize: 15 }} />
                                             </a>
                                         </Tooltip> : null}
+                                        <div className={'mt-10'}>
+                                          <div className={'f-c-c'}>
+                                            <AddImageView width={150} height={150} border={true}/>
+                                          </div>
+                                        </div>
                                     </div>
                                 })
                                 }

@@ -25,7 +25,7 @@ class AddImageView extends Component<IProps, IState> {
   render() {
     const { width, height, border } = this.props;
     return <a className='add-image-view'
-      style={{ width: width + 'px', height: height + 'px', border: border ? '1px solid #f8f8f8' : null }}>
+      style={{ width: width + 'px', height: height + 'px', border: border ? '1px solid #d9d9d9' : null }}>
       <span><Icon type="plus-circle" /> 添加图片</span>
     </a>
   }
