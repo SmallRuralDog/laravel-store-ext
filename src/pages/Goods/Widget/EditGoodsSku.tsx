@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Card, Checkbox, Icon, Tooltip } from 'antd';
+import { Button, Card } from 'antd';
 import * as _ from 'lodash';
+import SkuListEdit from './SkuListEdit';
 
 const styles = require('./styles.less');
 
@@ -10,35 +11,34 @@ class EditGoodsSku extends Component<IProps, IState> {
   } as IState;
 
   addGroupItem = () => {
-    const selfSkuGroup = _.clone(this.state.sku_group);
-    selfSkuGroup.push(_.clone(GroupItem));
-    this.setState({
-      sku_group: selfSkuGroup,
-    });
+    const selfSkuGroup = _.cloneDeep(this.state.sku_group);
+    selfSkuGroup.push(_.cloneDeep(GroupItem));
+    this.changeSkuGroup(selfSkuGroup);
   };
+
+
+  changeSkuGroup = (data) => {
+    this.setState({
+      sku_group: data
+    })
+  }
+
 
 
   render() {
     const { sku_group } = this.state;
-    const SkuListEdit = () => {
-      return <div>
-        {sku_group.map((item, index) => {
-          return <div key={index}>
-            <div className={styles.sku_group_title}>
-              <span>规格名：</span>
-              {index === 0 ? <div className={'f-c-c'}><Checkbox>添加规格图片</Checkbox><Tooltip title={Text.add_image}><Icon theme='twoTone' type="info-circle" /></Tooltip></div> : null}
-            </div>
-            <div className={styles.sku_group_container}>
-              <span>规格值：</span>
-            </div>
-          </div>;
-        })}
-      </div>;
-    };
+    const { goods, maxGroup } = this.props
+
     return <Card bodyStyle={{ padding: 0 }}>
-      <SkuListEdit />
+      <SkuListEdit
+        sku_group={sku_group}
+        goods={goods}
+        SkuItem={SkuItem}
+        changeSkuGroup={this.changeSkuGroup}
+      />
       <div className={styles.sku_group_title}>
-        <Button type='primary' onClick={this.addGroupItem}>添加商品规格</Button>
+        <Button disabled={sku_group.length >= maxGroup} type='primary' onClick={this.addGroupItem}>添加商品规格</Button>
+        {sku_group.length > 0 ? <a className='ml-10'>自定义排序</a> : null}
       </div>
     </Card>;
   }
@@ -46,38 +46,33 @@ class EditGoodsSku extends Component<IProps, IState> {
 
 
 interface IProps {
-
+  goods: Models.Goods;
+  /**
+   * 最大规格数
+   */
+  maxGroup: number;
 }
 
 interface IState {
-  sku_group: IGroupItem[]
+  sku_group: Models.IGroupItem[]
 }
 
-interface ISkuItem {
-  id: number;
-  name: string;
-  image: string;
-}
 
-interface IGroupItem {
-  id: number;
-  name: string;
-  is_image: boolean;
-  sku_list: ISkuItem[]
-}
 
-const SkuItem: ISkuItem = {
+const SkuItem: Models.ISkuItem = {
   id: null,
   name: '',
   image: '',
+  defaultOpen: true
 };
-const GroupItem: IGroupItem = {
+const GroupItem: Models.IGroupItem = {
   id: null,
   name: '',
   is_image: false,
+  defaultOpen: true,
   sku_list: [_.clone(SkuItem)],
 };
 const Text = {
-  add_image:'仅支持为第一组规格设置规格图片（最多40张图），买家选择不同规格会看到对应规格图片，建议尺寸：800 x 800像素'
+  add_image: '仅支持为第一组规格设置规格图片，买家选择不同规格会看到对应规格图片，建议尺寸：800 x 800像素'
 }
 export default EditGoodsSku;

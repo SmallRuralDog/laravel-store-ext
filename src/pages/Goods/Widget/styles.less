@@ -7,10 +7,27 @@
   height: 46px;
   font-size: 13px;
 }
-
 .sku_group_container {
   display: flex;
-  align-items: center;
-  padding: 10px;
-  font-size: 12px;
+  flex-wrap: wrap;
+  padding:7px 10px;
+  font-size: 13px;
+  min-height: 46px;
+.sku_values_item{
+  box-sizing: border-box;
+  position: relative;
+  .sku_values_item_del_btn{
+    line-height: 1;
+     position: absolute;
+     top: -7px;
+     right: -7px;
+     display: none;
+  }
+  
+}
+.sku_values_item:hover{
+  .sku_values_item_del_btn{
+    display: block;
+  }
+}
 }

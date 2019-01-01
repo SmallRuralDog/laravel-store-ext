@@ -1,7 +1,8 @@
-import { getList } from '@/services/goods';
+import { getList, getSkus } from '@/services/goods';
 export default {
   state: {
     list: [],
+    skus: []
   },
   effects: {
     *list({ payload }, { call, put, select }) {
@@ -13,7 +14,13 @@ export default {
           payload: response,
         })
       }
-
+    },
+    *skus({ plyload }, { call, put }) {
+      const response = yield call(getSkus, plyload)
+      yield put({
+        type: 'setSkus',
+        payload: response
+      })
     }
   },
   reducers: {
@@ -22,6 +29,12 @@ export default {
         ...state,
         list: action.payload.list
       };
+    },
+    setSkus(state, action) {
+      return {
+        ...state,
+        skus: action.payload
+      }
     }
   }
 }

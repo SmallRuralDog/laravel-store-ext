@@ -7,23 +7,31 @@ import ShareDescExtra from './Widget/ShareDescExtra';
 import EditGoodsImageList from './Widget/EditGoodsImageList';
 import MediaDialog from '@/components/MediaDialog';
 import EditGoodsSku from '@/pages/Goods/Widget/EditGoodsSku';
+import LineationExtra from './Widget/LineationExtra';
 
 const styles = require('./Edit.less');
 
 interface IProps {
-
+  goods: Models.Goods,
+  dispatch: Functions.dispatch
 }
 
 interface IState {
 
 }
 
-@connect(({ media }) => {
-  return {};
+@connect(({ media, goods }) => {
+  return {
+    goods
+  };
 })
 class GoodsEdit extends React.Component<IProps, IState> {
   componentDidMount() {
+    const { dispatch } = this.props
 
+    dispatch({
+      type:'goods/skus'
+    })
   }
 
   render() {
@@ -63,9 +71,21 @@ class GoodsEdit extends React.Component<IProps, IState> {
             <Affix>
               <FormTitle title='价格库存' />
             </Affix>
-            <Form.Item {...formItemLayout} label={'商品规格'} extra={'如有颜色、尺码等多种规格，请添加商品规格'}>
-              <EditGoodsSku/>
+            <Form.Item {...formItemLayout} label={'商品规格'} extra={'如有颜色、尺码等多种规格，请添加商品规格，最多添加3个规格'}>
+              <EditGoodsSku {...this.props} maxGroup={3} />
             </Form.Item>
+            <Form.Item {...formItemLayout} label='价格' required  >
+              <Input style={{ maxWidth: 130 }} addonBefore='￥' />
+            </Form.Item>
+            <Form.Item {...formItemLayout} label='划线价' extra={<LineationExtra />}>
+              <Input style={{ maxWidth: 130 }} addonBefore='￥'/>
+            </Form.Item>
+            <Form.Item {...formItemLayout} label='库存' required >
+              <Input style={{ maxWidth: 130 }} />
+            </Form.Item>
+            <Affix>
+              <FormTitle title='其他信息' />
+            </Affix>
           </Form>
 
 

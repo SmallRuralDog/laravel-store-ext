@@ -207,5 +207,49 @@ export default {
         "supplier_team_name": null
       }
     ]
-  }
+  },
+  'GET /api/skus': [
+    {
+      id: 1,
+      'text': '颜色',
+      values: [
+        {
+          id: 1,
+          text: '红色'
+        },
+        {
+          id: 2,
+          text: '白色'
+        },
+        {
+          id: 3,
+          text: '黑色'
+        },
+        {
+          id: 4,
+          text: '蓝色'
+        },
+      ]
+    },
+    {
+      id: 2,
+      'text': '尺寸',
+      values: []
+    },
+    {
+      id: 3,
+      'text': '尺码',
+      values: []
+    },
+    {
+      id: 4,
+      'text': '规格',
+      values: []
+    },
+    {
+      id: 5,
+      'text': '种类',
+      values: []
+    }
+  ]
 }
