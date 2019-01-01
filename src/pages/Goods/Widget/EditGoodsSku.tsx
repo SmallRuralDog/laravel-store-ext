@@ -31,6 +31,7 @@ class EditGoodsSku extends Component<IProps, IState> {
 
     return <Card bodyStyle={{ padding: 0 }}>
       <SkuListEdit
+        {...this.props}
         sku_group={sku_group}
         goods={goods}
         SkuItem={SkuItem}
@@ -62,7 +63,7 @@ interface IState {
 const SkuItem: Models.ISkuItem = {
   id: null,
   name: '',
-  image: '',
+  image: null,
   defaultOpen: true
 };
 const GroupItem: Models.IGroupItem = {

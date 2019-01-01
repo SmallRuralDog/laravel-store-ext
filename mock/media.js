@@ -5,7 +5,7 @@ export default {
     'list|24': [{
       id: '@id',
       name: '@string',
-      thumb: mockjs.Random.image('200x200'),
+      thumb: mockjs.Random.image('200x300'),
       'value|1-100': 150,
       'type|0-2': 1,
     }],

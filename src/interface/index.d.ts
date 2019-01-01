@@ -36,10 +36,10 @@ declare namespace Models {
   interface ISkuItem {
     id: number;
     name: string;
-    image: string;
+    image: MediaListItem;
     defaultOpen: boolean;
   }
-  
+
   interface IGroupItem {
     id: number;
     name: string;
@@ -50,8 +50,25 @@ declare namespace Models {
 
 
   interface Media {
+    /**
+     * 是否显示弹窗
+     */
     visible: boolean;
+    /**
+     * 最大选择数量
+     */
+    max: number;
+    /**
+     * 已选择列表
+     */
+    selected:MediaListItem[];
+    /**
+     * 选择回调
+     */
     callBack: (res: MediaListItem[]) => void;
+    /**
+     * 媒体列表数据
+     */
     list: MediaListItem[]
   }
 

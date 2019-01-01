@@ -20,7 +20,7 @@
       -webkit-box-sizing: border-box;
       -moz-box-sizing: border-box;
       box-sizing: border-box;
-      i.selected_index {
+      .selected_index {
         position: absolute;
         right: 0;
         top: 0;
@@ -29,7 +29,7 @@
         color: #fff;
         font-style: normal;
         line-height: 15px;
-        width: 15px;
+        min-width: 15px;
         text-align: center;
         height: 15px;
       }
@@ -49,6 +49,10 @@
   .page_view{
     display: flex;
     justify-content: center;
+  }
+  .image_item{
+    background-size: cover;
+    background-position: center;
   }
 }
 

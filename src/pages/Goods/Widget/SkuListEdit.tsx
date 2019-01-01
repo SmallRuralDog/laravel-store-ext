@@ -4,14 +4,20 @@ const styles = require('./styles.less');
 import * as _ from 'lodash';
 import { Select, Tooltip, Checkbox, Icon, Button } from "antd";
 import AddImageView from '@/components/Widget/AddImageView';
+import SelectedImageView from "@/components/Widget/SelectedImageView";
 class SkuListEdit extends Component<{
     sku_group: Models.IGroupItem[];
     goods: Models.Goods;
-    SkuItem: Models.ISkuItem,
+    SkuItem: Models.ISkuItem;
+    dispatch?: Functions.dispatch;
     changeSkuGroup: (data: Models.IGroupItem[]) => void;
 }, {
-
+    addSkuValueImage: boolean;
 }>{
+
+    state = {
+        addSkuValueImage: false
+    }
 
     changeSkuGroup = (data) => {
         this.props.changeSkuGroup(data)
@@ -44,7 +50,13 @@ class SkuListEdit extends Component<{
                                         key={item.text}>{item.text}</Select.Option>
                                 })}
                             </SkuSelect>
-                            {SkuGroupIndex === 0 ? <div className={'f-c-c font-12 ml-10'}><Tooltip title={Text.add_image}><Checkbox>添加规格图片</Checkbox></Tooltip></div> : null}
+                            {SkuGroupIndex === 0 ? <div className={'f-c-c font-12 ml-10'}><Tooltip title={Text.add_image}>
+                                <Checkbox checked={this.state.addSkuValueImage} onChange={(e) => {
+                                    this.setState({
+                                        addSkuValueImage: e.target.checked
+                                    })
+                                }}>添加规格图片</Checkbox>
+                            </Tooltip></div> : null}
                         </div>
                         <Tooltip title='删除规格组'>
                             <a
@@ -97,11 +109,33 @@ class SkuListEdit extends Component<{
                                                 <Icon type="close-circle" theme='twoTone' style={{ fontSize: 15 }} />
                                             </a>
                                         </Tooltip> : null}
-                                        <div className={'mt-10'}>
-                                          <div className={'f-c-c'}>
-                                            <AddImageView width={150} height={150} border={true}/>
-                                          </div>
-                                        </div>
+                                        {SkuGroupIndex == 0 && this.state.addSkuValueImage ? <div className={'mt-10'}>
+                                            <div className={'f-c ' + styles.sku_image}>
+                                                <div className={styles.arrow}></div>
+                                                <div
+                                                    onClick={() => {
+                                                        this.props.dispatch({
+                                                            type: 'media/show',
+                                                            payload: {
+                                                                max: 1,
+                                                                callBack: ((res: Models.MediaListItem[]) => {
+                                                                    const newSKuGroup = _.cloneDeep(sku_group)
+                                                                    newSKuGroup[SkuGroupIndex].sku_list[SkuListIndex].image = res[0]
+                                                                    this.changeSkuGroup(newSKuGroup);
+                                                                })
+                                                            }
+                                                        })
+                                                    }}
+                                                    style={{border:'1px solid #d9d9d9'}}
+                                                >
+                                                    {
+                                                        SkuListItem.image ?
+                                                            <SelectedImageView width={100} height={100} item={SkuListItem.image} border={false} />
+                                                            : <AddImageView width={100} height={100} border={false} />
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div> : null}
                                     </div>
                                 })
                                 }

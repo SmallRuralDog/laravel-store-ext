@@ -19,16 +19,19 @@ class EditGoodsImageList extends Component<any, IState> {
   }
 
   onAddImageViewClick = () => {
+    const { images } = this.state;
     this.props.dispatch({
       type: 'media/show',
       payload: {
+        max: 10 - images.length,
+        selected: images,
         callBack: (res: Models.MediaListItem[]) => {
-          const images = _.clone(this.state.images);
+          const SelfImages = _.cloneDeep(images);
           res.map(item => {
-            images.push(item);
+            SelfImages.push(item);
           });
           this.setState({
-            'images': images,
+            'images': SelfImages,
           });
         },
       },
@@ -37,8 +40,6 @@ class EditGoodsImageList extends Component<any, IState> {
 
   onSortEnd = ({ oldIndex, newIndex }) => {
     const images = arrayMove(this.state.images, oldIndex, newIndex);
-
-    console.log(images);
     this.setState({
       'images': images,
     });
@@ -47,15 +48,29 @@ class EditGoodsImageList extends Component<any, IState> {
   render() {
     const { images } = this.state;
 
-    const ImageList = images ? images.map((item,index) => {
-      return <SelectedImageView key={index} width={90} height={90} item={item} />;
+    const ImageList = images ? images.map((item, index) => {
+      return <SelectedImageView
+        key={index}
+        width={94}
+        height={94}
+        item={item} border={true}
+        className='mr-10 mb-10'
+        showDelBtn={true}
+        onDel={(delItem) => {
+          let SelfImages = _.cloneDeep(this.state.images)
+          SelfImages.splice(index, 1)
+          this.setState({
+            images: SelfImages
+          })
+        }}
+      />;
     }) : null;
 
-    return <div style={{display:'flex'}}>
+    return <div style={{ display: 'flex', flexWrap: 'wrap' }}>
       {ImageList}
-      <div onClick={this.onAddImageViewClick} style={{ display: 'inline-block' }}>
-        <AddImageView width={90} height={90} border={true} />
-      </div>
+      {images.length < 10 ? <div onClick={this.onAddImageViewClick} style={{ display: 'inline-block' }}>
+        <AddImageView width={100} height={100} border={true} />
+      </div> : null}
     </div>;
   }
 }

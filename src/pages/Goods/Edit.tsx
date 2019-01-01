@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 import FooterToolbar from '@/components/FooterToolbar';
-import { Card, Button, Steps, Icon, Affix, Form, Input } from 'antd';
+import { Card, Button, Steps, Icon,  Form, Input } from 'antd';
 import ShareDescExtra from './Widget/ShareDescExtra';
 import EditGoodsImageList from './Widget/EditGoodsImageList';
 import MediaDialog from '@/components/MediaDialog';
@@ -30,7 +30,7 @@ class GoodsEdit extends React.Component<IProps, IState> {
     const { dispatch } = this.props
 
     dispatch({
-      type:'goods/skus'
+      type: 'goods/skus'
     })
   }
 
@@ -56,9 +56,7 @@ class GoodsEdit extends React.Component<IProps, IState> {
           </div>
 
           <Form>
-            <Affix>
-              <FormTitle title='基本信息' />
-            </Affix>
+            <FormTitle title='基本信息' />
             <Form.Item {...formItemLayout} label='商品名' required extra={'商品标题长度至少3个字，最长50个汉字'}>
               <Input style={{ maxWidth: 500 }} />
             </Form.Item>
@@ -68,9 +66,7 @@ class GoodsEdit extends React.Component<IProps, IState> {
             <Form.Item {...formItemLayout} label='商品图' required extra={'建议尺寸：800*800像素，你可以拖拽图片调整顺序，最多上传15张'}>
               <EditGoodsImageList {...this.props} />
             </Form.Item>
-            <Affix>
-              <FormTitle title='价格库存' />
-            </Affix>
+            <FormTitle title='价格库存' />
             <Form.Item {...formItemLayout} label={'商品规格'} extra={'如有颜色、尺码等多种规格，请添加商品规格，最多添加3个规格'}>
               <EditGoodsSku {...this.props} maxGroup={3} />
             </Form.Item>
@@ -78,14 +74,12 @@ class GoodsEdit extends React.Component<IProps, IState> {
               <Input style={{ maxWidth: 130 }} addonBefore='￥' />
             </Form.Item>
             <Form.Item {...formItemLayout} label='划线价' extra={<LineationExtra />}>
-              <Input style={{ maxWidth: 130 }} addonBefore='￥'/>
+              <Input style={{ maxWidth: 130 }} addonBefore='￥' />
             </Form.Item>
             <Form.Item {...formItemLayout} label='库存' required >
               <Input style={{ maxWidth: 130 }} />
             </Form.Item>
-            <Affix>
-              <FormTitle title='其他信息' />
-            </Affix>
+            <FormTitle title='其他信息' />
           </Form>
 
 
