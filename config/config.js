@@ -62,7 +62,7 @@ export default {
   },
   // 路由配置
   routes: pageRoutes,
-  //history: 'hash',
+  history: 'hash',
   // Theme for antd
   // https://ant.design/docs/react/customize-theme-cn
   theme: {
@@ -71,13 +71,12 @@ export default {
   externals: {
     '@antv/data-set': 'DataSet',
   },
-  // proxy: {
-  //   '/server/api/': {
-  //     target: 'https://preview.pro.ant.design/',
-  //     changeOrigin: true,
-  //     pathRewrite: { '^/server': '' },
-  //   },
-  // },
+  /*proxy: {
+    '/api': {
+      target: 'http://lp.test/',
+
+    },
+  },*/
   ignoreMomentLocale: true,
   lessLoaderOptions: {
     javascriptEnabled: true,

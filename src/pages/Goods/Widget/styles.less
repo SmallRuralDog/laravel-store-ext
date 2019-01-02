@@ -28,39 +28,43 @@
     }
 
   }
+
   .sku_values_item:hover {
     .sku_values_item_del_btn {
       display: block;
     }
   }
-  .sku_image{
+
+  .sku_image {
     display: inline-block;
-  position: relative;
-  .arrow{
-    position: absolute;
-    width: 0;
-    height: 0;
-    top: -7px;
-    left: 50%;
-    margin-left: -2.5px;
-    border-style: solid;
-    border-color: transparent;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 5px solid #000;
-    
+    position: relative;
+
+    .arrow {
+      position: absolute;
+      width: 0;
+      height: 0;
+      top: -7px;
+      left: 50%;
+      margin-left: -2.5px;
+      border-style: solid;
+      border-color: transparent;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 5px solid #666;
+
+    }
+
+    .arrow:after {
+      position: absolute;
+      display: block;
+      width: 0;
+      height: 0;
+      border: 10px solid transparent;
+      top: 0;
+      margin-left: -10px;
+      border-bottom-color: #fff;
+      border-top-width: 0;
+      content: "";
+    }
   }
-  .arrow:after{
-    position: absolute;
-  display: block;
-  width: 0;
-  height: 0;
-  border: 10px solid transparent;
-  top: 0;
-  margin-left: -10px;
-  border-bottom-color: #fff;
-  border-top-width: 0;
-  content: "";
-  }
-}
 }

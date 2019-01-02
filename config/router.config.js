@@ -4,20 +4,20 @@ export default [
     path: '/user',
     component: '../layouts/UserLayout',
     routes: [{
-        path: '/user',
-        redirect: '/user/login'
-      },
+      path: '/user',
+      redirect: '/user/login',
+    },
       {
         path: '/user/login',
-        component: './User/Login'
+        component: './User/Login',
       },
       {
         path: '/user/register',
-        component: './User/Register'
+        component: './User/Register',
       },
       {
         path: '/user/register-result',
-        component: './User/RegisterResult'
+        component: './User/RegisterResult',
       },
     ],
   },
@@ -31,7 +31,7 @@ export default [
       // dashboard
       {
         path: '/',
-        redirect: '/dashboard'
+        redirect: '/dashboard',
       },
       {
         icon: 'dashboard',
@@ -47,16 +47,32 @@ export default [
         routes: [{
           path: '/goods/list',
           name: 'list',
-          component: './Goods/List'
+          component: './Goods/List',
         }, {
           path: '/goods/edit',
           name: 'edit',
           component: './Goods/Edit',
-          hideInMenu : true
-        }]
+          hideInMenu: true,
+        }],
+      }
+    ],
+  },
+  //exception
+  {
+    path: '/exception',
+    component: '../layouts/BlankLayout',
+    routes: [
+      {
+        path: '/exception/403',
+        component: './Exception/403',
       },
       {
-        component: '404',
+        path: '/exception/404',
+        component: './Exception/404',
+      },
+      {
+        path: '/exception/500',
+        component: './Exception/500',
       },
     ],
   },

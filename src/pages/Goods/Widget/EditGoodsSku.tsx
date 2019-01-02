@@ -21,7 +21,7 @@ class EditGoodsSku extends Component<IProps, IState> {
     this.setState({
       sku_group: data
     })
-  }
+  };
 
 
 
@@ -73,7 +73,5 @@ const GroupItem: Models.IGroupItem = {
   defaultOpen: true,
   sku_list: [_.clone(SkuItem)],
 };
-const Text = {
-  add_image: '仅支持为第一组规格设置规格图片，买家选择不同规格会看到对应规格图片，建议尺寸：800 x 800像素'
-}
+
 export default EditGoodsSku;

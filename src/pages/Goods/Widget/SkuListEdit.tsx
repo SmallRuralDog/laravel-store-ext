@@ -17,11 +17,11 @@ class SkuListEdit extends Component<{
 
     state = {
         addSkuValueImage: false
-    }
+    };
 
     changeSkuGroup = (data) => {
         this.props.changeSkuGroup(data)
-    }
+    };
 
     render() {
         const { sku_group, goods, SkuItem } = this.props
@@ -35,9 +35,9 @@ class SkuListEdit extends Component<{
                                 style={{ width: 150 }}
                                 value={SkuGroupItem.id}
                                 onChange={(value) => {
-                                    const newSKuGroup = _.cloneDeep(sku_group)
+                                    const newSKuGroup = _.clone(sku_group)
                                     newSKuGroup[SkuGroupIndex].id = value as number
-                                    newSKuGroup[SkuGroupIndex].sku_list = [_.cloneDeep(SkuItem)]
+                                    newSKuGroup[SkuGroupIndex].sku_list = [_.clone(SkuItem)]
                                     this.changeSkuGroup(newSKuGroup);
                                 }}>
                                 {goods.skus.map((item, index) => {
@@ -62,7 +62,7 @@ class SkuListEdit extends Component<{
                             <a
                                 style={{ lineHeight: 1 }}
                                 onClick={() => {
-                                    const newSKuGroup = _.cloneDeep(sku_group)
+                                    const newSKuGroup = _.clone(sku_group)
                                     _.pull(newSKuGroup, newSKuGroup[SkuGroupIndex])
                                     this.changeSkuGroup(newSKuGroup);
                                 }}
@@ -83,7 +83,7 @@ class SkuListEdit extends Component<{
                                             style={{ width: 150 }}
                                             value={SkuListItem.id}
                                             onChange={(value) => {
-                                                const newSKuGroup = _.cloneDeep(sku_group)
+                                                const newSKuGroup = _.clone(sku_group)
                                                 newSKuGroup[SkuGroupIndex].sku_list[SkuListIndex].id = value as number
                                                 this.changeSkuGroup(newSKuGroup);
                                             }}
@@ -101,7 +101,7 @@ class SkuListEdit extends Component<{
                                             <a
                                                 className={styles.sku_values_item_del_btn}
                                                 onClick={() => {
-                                                    const newSKuGroup = _.cloneDeep(sku_group)
+                                                    const newSKuGroup = _.clone(sku_group)
                                                     newSKuGroup[SkuGroupIndex].sku_list = _.pull(newSKuGroup[SkuGroupIndex].sku_list, newSKuGroup[SkuGroupIndex].sku_list[SkuListIndex])
                                                     this.changeSkuGroup(newSKuGroup);
                                                 }}
@@ -109,7 +109,7 @@ class SkuListEdit extends Component<{
                                                 <Icon type="close-circle" theme='twoTone' style={{ fontSize: 15 }} />
                                             </a>
                                         </Tooltip> : null}
-                                        {SkuGroupIndex == 0 && this.state.addSkuValueImage ? <div className={'mt-10'}>
+                                        {SkuGroupIndex === 0 && this.state.addSkuValueImage ? <div className={'mt-10'}>
                                             <div className={'f-c ' + styles.sku_image}>
                                                 <div className={styles.arrow}></div>
                                                 <div
@@ -119,7 +119,7 @@ class SkuListEdit extends Component<{
                                                             payload: {
                                                                 max: 1,
                                                                 callBack: ((res: Models.MediaListItem[]) => {
-                                                                    const newSKuGroup = _.cloneDeep(sku_group)
+                                                                    const newSKuGroup = _.clone(sku_group)
                                                                     newSKuGroup[SkuGroupIndex].sku_list[SkuListIndex].image = res[0]
                                                                     this.changeSkuGroup(newSKuGroup);
                                                                 })
@@ -144,7 +144,7 @@ class SkuListEdit extends Component<{
                                     style={{ flexShrink: 0 }}
                                     disabled={sku_group[SkuGroupIndex].sku_list.length >= 40}
                                     onClick={() => {
-                                        const newSKuGroup = _.cloneDeep(sku_group)
+                                        const newSKuGroup = _.clone(sku_group)
                                         newSKuGroup[SkuGroupIndex].sku_list.push(_.clone(SkuItem))
                                         this.changeSkuGroup(newSKuGroup);
                                     }}><Icon type="plus" />添加规格值</Button>
@@ -161,5 +161,5 @@ class SkuListEdit extends Component<{
 }
 const Text = {
     add_image: '仅支持为第一组规格设置规格图片，买家选择不同规格会看到对应规格图片，建议尺寸：800 x 800像素'
-}
+};
 export default SkuListEdit;
